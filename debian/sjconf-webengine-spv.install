@@ -1,0 +1,4 @@
+sjconf/plugins/*.py usr/share/sjconf-webengine-spv/
+sjconf/templates/webengine-spv/*.conf etc/webengine/sjconf/templates/webengine-spv/
+sjconf/confs/*.conf etc/webengine/sjconf/confs/
+debian/tmp/usr/share/man/man8

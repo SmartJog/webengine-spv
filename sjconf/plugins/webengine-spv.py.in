@@ -1,0 +1,16 @@
+from sjconf import *
+
+
+class Plugin(PluginWithTemplate):
+
+    VERSION = '@VERSION@'
+
+    def template_path(self, file_path, confs_to_test):
+        return self.sjconf.etc_dir + '/webengine/sjconf/templates/webengine-spv/webengine-spv.conf'
+
+    def conf_files_path(self):
+        return (self.sjconf.etc_dir + '/webengine/webengine-spv.conf',)
+
+    def services_to_restart(self):
+        return ('apache2',)
+

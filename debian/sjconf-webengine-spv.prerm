@@ -1,0 +1,19 @@
+#!/bin/sh
+# PostRm script for WebEngine.
+
+set -e
+
+#DEBHELPER#
+
+if [ "$1" = 'remove' ]
+then
+    sjconf --disable-plugin webengine-spv || true
+    sjconf --uninstall-plugin webengine-spv || true
+    if [ -e /etc/webengine/sjconf/templates/webengine-spv/webengine-spv.conf ]
+    then
+        sjconf --uninstall-template webengine-spv || true
+    fi
+    sjconf --uninstall-conf webengine-spv || true
+fi
+
+exit 0

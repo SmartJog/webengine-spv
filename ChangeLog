@@ -1,0 +1,276 @@
+Version 0.12.1 Released on 2011/04/26
+
+	* Release under the LGPL 2.1.
+
+Version 0.12.0 Released on 2011/04/26
+
+	* Split collect code into its own webengine package.
+
+Version 0.11.0 Released on 2011/03/09
+
+	* Adapt to new widgets and templates system.
+	* Enhanced reschedule_check to take a batch of status_id,
+	  closes: #3737.
+	* Create internal api methods for get_groups and get_objects and
+	  wrap them into exposed webengine methods, refs: #3927.
+	* Add methods to manage objects-groups and relations, closes: #3927.
+	* Fix some typographic mistakes in services.py, refs: 3927.
+	* Add an option to get_groups to make it return associated objects,
+	  closes: #3947.
+	* Change behavior of get_status to always returns same kind of dictionaries,
+	  refs: #3942.
+	* Adapt get_checks to keep old behavior, refs: #3942.
+	* Add private functions for future cleaning of get_status, refs: #3942.
+	* Fix one typographic mistake in OBJECT_INFOS_FIELDS, refs: #3942.
+	* Add list STATUS_INFOS_FIELDS for new private functions, refs: #3942.
+	* Clean get_status and use new private functions , refs: #3942.
+	* Add appropriate test suite items, closes: #3942.
+	* Droped get_detailed_infos option, refs: #3942.
+	* Fix bug in _get_queries_and_result_rows, refs: #3942.
+	* Fix bug in get_status when update_next_check is enabled,
+	  refs: #3942.
+	* Add options to get_checks and get_objects to return associated
+	  per object or check groups, closes: #3098.
+	* Create webengine-spv.conf man page, closes: #3033.
+	* Fix missing {status|group|object}_infos keys from _get_infos
+	  return, closes: #4018.
+	* Remove unnecessary for loop in _get_infos, closes: #4019.
+	* collect/rxtxspv.py: fix TypeError in check_toolbox_status() when
+	  toolbox is down, closes: #4029.
+
+Version 0.10.2 Released on 2010/10/27
+
+	* Fix get_all checks data concatenation, closes: #3618.
+	* Update services man page for delete_status_infos function.
+	* Do not return flattened values for toolbox check, refs: #3497.
+	* collect: make sure dvbsnoop execution time does not exceed 500ms,
+	  closes: #3620.
+
+Version 0.10.1 Released on 2010/10/20
+
+	* Added dvbsnoop bandwidth and bad packet ratio, closes: #3477
+	* Modified SQL files to have {chk,obj}_id,grp_id unique in
+	  {objects,checks}_group tables.
+	* services.py: set_check_status: Do not try to update any status or
+	  status_infos if status does not exist anymore.
+	* collect: do not return "flattened" dictionaries, closes: #3497.
+
+Version 0.10.0 Released on 2010/08/24
+
+	* Added a delete_status_infos function.
+	* Cosmetic fixes in check_dvb_status, closes: #3337.
+	* Added lock status check to check_dvb_status, refs: #3401.
+	* Added raw string output in check_dvb_status return, closes: #3401.
+
+Version 0.9.1 Released on 2010/07/05
+
+	* Do not raise on missing dvb informations, closes: #3302.
+
+Version 0.9.0 Released on 2010/07/02
+
+	* Get dvb status in collect, closes: #2874.
+	* Improve dvb-status retrieving in collect plugin, refs: #2874.
+	* Move spv-data to webengine-spv-data, refs: #3280.
+	* Update models.py, add 'max_length' attribute to CharField, refs: #3280.
+	* Move get_checks to deprecated and add get_status, refs: #3195.
+	* Add creation_date in data returned by create_object, refs: #3195.
+	* Add get_objects function to services.py, refs: #3195.
+	* Fix update function for groups, refs: #3195.
+	* Add selection by info for checks, refs: #3195.
+	* Add selection by info for objects, refs: #3195.
+	* Fix create_checks and create_objects to correctly handle errors, refs: #3195.
+	* Fix get_status to follow the documentation, refs: #3195.
+	* Improve test, closes: #3195.
+
+Version 0.8.5 Released on 2010/05/17
+
+	* Update webengine-spv-services man page with latest API changes.
+	* services: Fix typo in call to logger.
+
+Version 0.8.4 Released on 2010/05/17
+
+	* services: set_checks_status: Skipping status update if status has been
+	  deleted.
+	* views: Overdue also based on last_check (if last_check too far in past).
+
+Version 0.8.3 Released on 2010/05/12
+
+	* admin: Added sort list filters and search on certain models.
+	* services: Allow to give a single item or a list for get_checks
+	  'group_name', 'group_id' and 'plugin_check' parameters.
+	* services: get_checks now returns check in order of next_check.
+	* services: set_checks_status: verify input data validity before commiting
+	  results.
+
+Version 0.8.2 Released on 2010/05/03
+
+	* Update webengine-spv-services man page with latest API changes.
+	* services: correctly handle savepoints when errors happen during
+	  checks/objects/groups creation.
+	* services: add missing repeat_on_error in create_checks.
+	* services: fix some typos and update documentation.
+	* Add test suite seed. It needs a configured service to be any useful.
+
+Version 0.8.1 Released on 2010/04/28
+
+	* doc: Updated documentation.
+	* Fix overdue checks display (if check status has never been
+	  acknowledged).
+	* views: various clean ups in status_details.
+	* collect: return timestamp with check_time, closes: #3090.
+	* views: fix use of undefined function.
+	* views: fix various pylint complaints in code.
+
+Version 0.8.0 Released on 2010/04/21
+
+	* services: add create_objects function, refs: #3072.
+	* services: add create_checks function, refs: #3072.
+	* services: add create_groups function, refs: #3072.
+	* services: add delete_* functions, refs: #3072.
+	* services: add update function, refs: #3072.
+	* Add webengine-spv-services documentation, closes: #3073.
+	* Added 'get_detailed_infos' parameter to get_checks function to let user
+	  choose if he wants full infos details such as db ids, etc.
+	* views: Using new get_checks 'get_detailed_infos' parameter.
+	* services: add rollback support and logging and refresh
+	  documentation, refs: #3072.
+	* Drop [spv] section in webengine-spv.conf made useless by @webengine_pgconn.
+	* Drop old 'spv' APIs, everything is now in 'spv.services'.
+	* Enhanced status details page (display useful infos first, binded escape
+	  keypress to close overlay, and some css enhancement)
+	* services: Support the new 'repeat_on_error' column in the SPV
+	  database, closes: #3035.
+	* Update services documentation following addition of repeat_on_error
+	  feature, refs: #3035.
+	* Fix rules for locales distributions.
+	* services: do not raise an error if the first execute failed in
+	  create_* functions, refs: #3072.
+	* services: add information about the rollback behavior of various
+	  methods, refs: #3073.
+	* Show outdated checks in the spv web interface, closes: #3042.
+
+Version 0.7.3 Released on 2010/02/22
+
+	* Removed memory-hogging rxtxspv's check_sjtools_status, closes: #2975.
+	* Added a database section to the configuration files, closes: #2974.
+
+Version 0.7.2 Released on 2010/01/25
+
+	* Audited code and packaging.
+	* Protect get_status_details helper function against missing object/check infos.
+
+Version 0.7.1 Released on 2010/01/25
+
+	* Now uses webengine_pgconn decorator, refs: #2807.
+	* Modified 'reschedule_check' javascript function to use a synchroneous
+	  XMLRequest instead of asynchroneaous.
+	* Moved all exportable code into services.py and added
+	  backward-compatibility function on sjspv.py
+	* Merged get_checks and get_checks status function
+	* Added object_infos and check_infos tables to admin.py and models.py
+	* Update __init__.py with appropriate imports.
+	* Include seq_id on get_checks results.
+	* Added parameter to get_checks function to update next_date on status just retreived.
+	* Always return at leat an empty dictionary for object_infos and check_infos.
+	* Check db entry representation on model.py now includes check.name.
+	* Added refresh feature on spv index page.
+	* Show object_infos and check_infos on check details page.
+
+Version 0.7.0 Released on 2010/01/18
+
+	* Added a parameter to the spv listing page to allow choosing between 'status'
+	  and 'history' display mode.
+
+Version 0.6.1 Released on 2010/01/14
+
+	* Forgot to pack statusdetails.{html,css}.
+
+Version 0.6.0 Released on 2010/01/14
+
+	* Added 'status_id' optional parameter to get_checks_status function.
+	* Added 'get_status_infos' optional parameter to get_checks_status function.
+	* get_checks_status function now returns all status by default.
+	* get_checks_status now returns 'status_changed_date' and
+	  'status_acknowledged_date' information.
+	* Added functions to reschedule a check right now on sjspv.py and views.py.
+	* Added functions to acknowledge a check status sjspv.py and views.py.
+	* Optimized index page by adding search and AJAX overlay to show status details.
+
+Version 0.5.1 Released on 2010/01/12
+
+	* collect/hardwarespv.py: remove useless import of sjutils.
+	* Forms.py was not shipped with upstream.
+
+Version 0.5.0 Released on 2010/01/12
+
+	* Remove the useless 'rxtx' prefix in collect/rxtxspv.py, closes: #2844.
+	* Remove the "processus" check, closes: #2845.
+	* Created models.py and admin.py so spv DB model is accessible using django admin interface
+	* collect/hardwarespv.py: fix hard disk drives size check for
+	  2.6.19.7, closes: #2851.
+	* collect: fix plugins not properly wait()ing their subprocesses, closes: #2855.
+	* collect/rxtxspv.py: fix version check for RxTx releases < 2.0, closes: #2849.
+	* Added get_groups and get_plugin_checks functions to webservices
+	* Added possibility to filter checks status by group_id and check_id on
+	  get_checks_status function.
+	* Refactored spv index page to support skins and filter/search functions.
+
+Version 0.4.0 Released on 2010/01/07
+
+	* Now uses PgConnManager class instead of manage_pgconn decorator, refs: #2807.
+	* Add support for status information, closes: #2831.
+	* Clean up useless overrides in sjconf plugin.
+	* Add date check to system plugin, closes: #2828.
+	* Moved get_statys function used by views.py on views.py and created an
+	  exportable get_checks_status function to be able to retreive checks results.
+
+Version 0.3.0 Released on 2009/12/11
+
+	* Include SPV checks framework, closes: #2725.
+	* Added SJConf supervision check, closes: #2726.
+	* Added Dell supervision check, closes: #2729.
+	* Added Hardaware supervision check, closes: #2730.
+	* Added System supervision check, closes: #2735.
+	* Added RxTx supervision check, closes: #2733.
+	* Added docstring documentation to RxTx plugin, closes: #2739.
+	* Add processus list check to systemspv: closes: #2734.
+	* Added Network supervision check, closes: #2744.
+
+Version 0.2.4 Released on 2009/11/20
+
+	* Using new webengine 0.7 version and its @manage_pgconn decorator.
+
+Version 0.2.3 Released on 2009/10/26
+
+	* Add localization support, refs: #2220.
+	* Added 'exportable' decorator to sjspv webservices functions to support
+	  webengine 0.5.0 security behaviour modifications.
+	* Update translations.
+
+Version 0.2.2 Released on 2009/07/02
+
+	* get_checks return results, oldest first, closes: #2070.
+	* Add sort functionality to status page, improve readability, closes: #2086.
+
+Version 0.2.1 Released on 2009/06/25
+
+	* Dummy re-release.
+
+Version 0.2.0 Released on 2009/06/22
+
+	* Added a status page for tracking error/successful checks.
+	* Added a get_status method in sjspv.
+	* Fixed: Remove hard coded user/pass/ip to gdartigu psql db.
+	* Small style changes.
+	* Added configuration file /etc/webengine/spv.conf.
+	* sjspv use spv.conf for database connection.
+	* get_status gives objects in dict with all their status.
+	* Display objects with their status in a more readable way.
+	* Add toggle status feature, improve readibility.
+	* Ship package with default /etc/webengine/webengine-spv.conf, closes: #2010.
+	* Add manpage for sjconf plugin, refs: #2012.
+	* Add missing dependency on webengine-front for jQuery.
+
+Version 0.1.0 Released on 2009/05/13
+
+	* Initial release.

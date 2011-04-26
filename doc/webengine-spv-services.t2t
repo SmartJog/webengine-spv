@@ -1,0 +1,481 @@
+webengine-spv
+webengine-spv-services
+%%mtime
+
+%!target : man
+%!encoding : utf-8
+%!postproc(man): "^(\.TH.*) 1 "  "\1 7 "
+
+= NAME =
+
+webengine-spv-services - Supervision module for WebEngine
+
+= DESCRIPTION =
+
+webengine-spv-services is a **WebEngine** module that provides a webservice frontend for the supervision database.
+
+= METHODS =
+
+== get_checks ==
+
+The method get_checks takes the following list of parameters: params=None
+
+Deprecated: use get_status instead
+
+== get_status ==
+
+The method get_status takes the following list of parameters: params=None
+
+Returns checks, groups and objects from supervision database.
+
+//params//: dictionary with parameters allowing fine grained selection of items from the SPV database
+         paramaters can be one of the following:
+    'status' (String or String List) get checks with the given status
+    'group_name' (String or String List) name(s) of the group(s) to get checks for
+    'object_address' (String) address of the object to get
+    'plugin_name' (String) name of the plugin to get checks for
+    'plugin_check' (String) name of the check to get
+    'group_id' (Integer or Integer List) return group(s) whose id(s) is(are) the one(s) specified
+    'check_id' (Integer) return check whose id is check_id
+    'status_id' (Integer) return status whose id is status_id
+    'limit' (Integer) maximum number of checks to get
+    'get_status_infos' (Boolean, default False) get additional informations attached to the requested status
+    'get_object_infos' (Boolean, default False) get additional informations attached to the requested objects
+    'get_check_infos' (Boolean, default False) get additional informations attached to the request checks
+    'get_check_groups' (Boolean, default False) get per check groups
+    'get_detailed_infos' (Boolean, default True) get detailed informations (returns dictionnary with DB entries ID, etc..)
+    'next_check_expired' (Boolean, default False) require check that are new
+    'update_next_check' (Boolean, default False) schedule next iteration of the checks
+
+//returns//: a dictionary containing list of status, groups and objects
+{
+    'checks': {
+        //chk_id//: {
+            'chk_id'        : Integer,
+            'name'          : String,
+            'plugin'        : String,
+            'plugin_check'  : String,
+            'repeat'        : Integer,
+            'repeat_on_error' : Integer,
+            'check_infos'   : {
+                //key// :  {
+                    'key'       : String,
+                    'cinfo_id'  : Integer,
+                    'chk_id'    : Integer,
+                    'value'     : String},
+            },
+            'groups' : {
+                'grp_id' : {
+                    'grp_id' : Integer,
+                    'name'   : String,
+                }, ...
+            }
+        },
+    },
+    'groups' :  {
+        //grp_id// : {
+            'grp_id' : Integer,
+            'name'   : String },
+    },
+    'objects':  {
+        //obj_id// : {
+            'obj_id'        : Integer,
+            'address'       : String,
+            'creation_date' : datetime.date,
+            'object_infos'   : {
+                //key// :  {
+                    'key'       : String,
+                    'oinfo_id'  : Integer,
+                    'obj_id'    : Integer,
+                    'value'     : String},
+            },
+
+        },
+    },
+    'status': [
+                {
+                    'cg_id'         : Integer,
+                    'chk_id'        : Integer,
+                    'grp_id'        : Integer,
+                    'obj_id'        : Integer,
+                    'seq_id'        : Integer,
+                    'check_message' : String,
+                    'check_status'  : String,
+                    'last_check'    : datetime.datetime,
+                    'next_check'    : datetime.datetime,
+                    'status_acknowledged_date': datetime.datetime
+                    'status_changed_date': datetime.datetime,
+                    'status_id': Integer,
+                    'status_infos': {
+                        //key// :  {
+                            'key'       : String,
+                            'sinfo_id'  : Integer,
+                            'status_id' : Integer,
+                            'value'     : String},
+                    },
+                },
+    ]
+}
+
+
+== get_plugin_checks ==
+
+The method get_plugin_checks takes the following list of parameters: params=None
+
+Returns checks from the supervision database filtered by //params//.
+
+//params//: dictionary of filters to apply to get checks
+    'plugin_name' (String)
+    'plugin_check_name' (String)
+    'check_id' (Integer)
+    'info_key' (String)
+    'info_value' (String)
+
+//returns//: list of checks
+    [{
+        'chk_id': Integer,
+        'plugin': String,
+        'plugin_check': String,
+        'name': String,
+        'repeat': Integer,
+        'repeat_on_error': Integer
+    }, { }, ... ]
+
+
+== get_groups ==
+
+The method get_groups takes the following list of parameters: params=None
+
+Returns groups from the supervision database filtered by //params//
+
+//params//: dictionary of filters to apply to get groups
+    'group_id' (Integer)
+    'group_name' (String)
+    'get_objects' (Boolean, default False)
+
+//returns//: list of groups
+    [{
+        'id': Integer,
+        'name': String
+        'objects': {
+            @obj_id: {
+                @obj_id: Integer,
+                address: String,
+                creation_date: database.date
+            }, ...
+        }
+    }, ... ]
+
+
+== get_objects ==
+
+The method get_objects takes the following list of parameters: params=None
+
+Returns objects from the supervision database filtered by //params//
+
+//params//: dictionary of filters to apply to get objects
+    'obj_id' (Integer)
+    'address' (String)
+    'creation_date' (String)
+    'info_key' (String)
+    'info_value' (String)
+    'get_object_groups' (Boolean, default False) get per object groups
+
+//returns//: list of objects
+    [{
+        'obj_id': Integer,
+        'address': String,
+        'creation_date': database.date
+        'groups' : {
+            'grp_id' : {
+                'grp_id' : Integer,
+                'name'   : String,
+            }, ...
+        }
+    }, ... ]
+
+
+== acknowledge_status ==
+
+The method acknowledge_status takes the following list of parameters: status_id
+
+Acknowledge status for //status_id// check.
+
+== reschedule_check ==
+
+The method reschedule_check takes the following list of parameters: status_id
+
+Reschedule check immediately for //status_id// check.
+
+== set_checks_status ==
+
+The method set_checks_status takes the following list of parameters: checks
+
+Sets results of provided //checks//.
+
+//checks//: must be a list of check dictionaries of the form
+    [{'status_id': sts_id_value,
+     'sequence_id': seq_id_value,
+     'status': sts_value,
+     'message': msg_value,
+     'status_infos': infos_dict,
+     }, ... ]
+
+
+
+
+
+
+== create_objects ==
+
+The method create_objects takes the following list of parameters: objects
+
+Create new objects with provided data.
+
+//checks//: must be a list of object dictionaries of the form:
+    [{
+        'address': String,
+        'group_id': Integer (optional),
+        'infos': (optional) {
+            //key//: //value//,
+            ...
+        }
+    }, ... ]
+    For each check, it is possible to automatically add it to an existing group according to its //group_id//.
+
+//returns//: dictionary containing new objects and if an error occurs during object creation, it is appended
+          to the //errors// key with an added //message// key containing the error message. All changes related to the
+          failed object creation will be rolled back.
+    {
+        'errors': [{
+            //object//-keys: //object//-values,
+            'message': String
+            }, ... ],
+        //obj_id//: {
+            'obj_id': Integer,
+            'address': String,
+            'creation_date': datetime.date
+        }, ...
+    }
+
+
+
+== create_checks ==
+
+The method create_checks takes the following list of parameters: checks
+
+Create new checks with provided data.
+
+//checks//: must be a list of check dictionaries of the form:
+    [{
+        'plugin': String,
+        'plugin_check': String,
+        'name': String,
+        'repeat': Integer,
+        'repeat_on_error': Integer,
+        'group_id': Integer (optional),
+        'infos': (optional) {
+            //key//: //value//,
+            ...
+        }
+    }, ... ]
+    For each check, it is possible to automatically add it to an existing group according to its //group_id//.
+
+//returns//: dictionary containing new checks and if an error occurs during object creation, it is appended
+          to the //errors// key with an added //message// key containing the error message. All changes related to the
+          failed check creation will be rolled back.
+    {
+        'errors': [{
+            //object//-keys: //object//-values,
+            'message': String
+            }, ... ],
+        //chk_id//: {
+            'chk_id': Integer,
+            'plugin': String,
+            'plugin_check': String,
+        }, ...
+    }
+
+
+
+
+== create_groups ==
+
+The method create_groups takes the following list of parameters: groups
+
+Create new groups.
+
+//groups//: list of group names
+    [String, String, ...]
+
+//returns//: dictionary containing new groups and if an error occurs during object creation, it is appended
+          to the //errors// key with an added //message// key containing the error message. All changes related to the
+          failed group creation will be rolled back.
+    {
+        'errors': [{
+            //object//-keys: //object//-values,
+            'message': String
+            }, ... ],
+        //group_id//: {
+            'grp_id': Integer,
+            'name': String
+        }, ...
+    }
+
+
+
+== delete_objects ==
+
+The method delete_objects takes the following list of parameters: object_ids
+
+Delete a set of objects.
+
+Will raise an error and rollback all deletions if an error occurs.
+
+//object_ids//: a list of object ids
+    [ Integer, Integer, ... ]
+
+
+== delete_checks ==
+
+The method delete_checks takes the following list of parameters: check_ids
+
+Delete a set of checks.
+
+Will raise an error and rollback all deletions if an error occurs.
+
+//check_ids//: a list of check ids
+    [ Integer, Integer, ... ]
+//see//: delete_objects
+
+
+== delete_groups ==
+
+The method delete_groups takes the following list of parameters: group_ids
+
+Delete a set of groups.
+
+Will raise an error and rollback all deletions if an error occurs.
+
+//group_ids//: a list of group ids
+    [ Integer, Integer, ... ]
+//see//: delete_objects
+
+
+== delete_status_infos ==
+
+The method delete_status_infos takes the following list of parameters: sinfo_ids
+
+Delete a set of status infos.
+
+Will raise an error and rollback all deletions if an error occurs.
+
+//sinfo_ids//: a list of sinfo ids
+    [ Integer, Integer, ... ]
+//see//: delete_objects
+
+
+
+
+
+== group_add_objects ==
+
+The method group_add_objects takes the following list of parameters: params
+
+Add a list of objects to a specified group according to //params//.
+
+Group and objects could be specified using their ids or unique string identifier.
+
+//params//: dictionary of the form:
+    {
+        'group': String or Integer,
+        'objects' : [ String or Integer, ... ]
+    }
+
+//returns//: dictionary containing a list of errors.
+    {
+        'errors': [{
+            'type': String,
+            //object-key//: //object-value//,
+            'message': String
+            }, ... ]
+    }
+
+
+== group_remove_objects ==
+
+The method group_remove_objects takes the following list of parameters: params
+
+Remove a list of objects from a specified group according to //params//.
+
+Group and objects could be specified using their ids or unique string identifier.
+
+//params//: dictionary of the form:
+    {
+        'group': String or Integer,
+        'objects' : [ String or Integer, ... ]
+    }
+
+//returns//: dictionary containing a list of errors.
+    {
+        'errors': [{
+            'type': String,
+            //object-key//: //object-value//,
+            'message': String
+            }, ... ]
+    }
+
+
+== update ==
+
+The method update takes the following list of parameters: params
+
+Update checks, groups and objects according to //params//.
+
+If an error occurs during the update, the method will raise an error and rollback all changes.
+
+//params//: dictionary of the form:
+    {
+        'objects':  {
+            //obj_id// : {
+                'obj_id'        : Integer,
+                'address'       : String,
+                'infos'         : {
+                    'insert': { //key// : String, ... },
+                    'delete': { //key// : String, ... }
+                }
+            }, ...
+        },
+        'checks': {
+            //chk_id//: {
+                'chk_id'        : Integer,
+                'name'          : String,
+                'plugin'        : String,
+                'plugin_check'  : String,
+                'repeat'        : Integer,
+                'repeat_on_error' : Integer,
+                'infos'         : {
+                    'insert': { //key// : String, ... },
+                    'delete': { //key// : String, ... }
+                }
+            }, ...
+        },
+        'groups' :  {
+            //grp_id// : {
+                'grp_id' : Integer,
+                'name'   : String
+            }, ...
+        }
+    }
+    Please note that chk_id, obj_id or grp_id are mandatory items that will not be changed.
+
+
+
+= AUTHOR =
+
+The spvd daemon and this manual page have been written by the **SmartJog** company.
+
+= SEE ALSO =
+
+**importer**(7)
+

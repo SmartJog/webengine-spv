@@ -1,0 +1,31 @@
+Source: webengine-spv
+Section: misc
+Priority: optional
+Maintainer: Philippe Bridant <philippe.bridant@smartjog.com>
+Uploaders: Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>, Nicolas Noirbent <nicolas.noirbent@smartjog.com>, Anthony Mavic <anthony.mavic@smartjog.com>, Thomas Souvignet <thomas.souvignet@smartjog.com>, Clément Bœsch <clement.boesch@smartjog.com>, Rémi Cardona <remi.cardona@smartjog.com>, Matthieu Bouron <matthieu.bouron@smartjog.com>
+Build-Depends: debhelper (>= 7), cdbs, python-central (>= 0.6), txt2tags, gettext
+XS-Python-Version: >= 2.5
+Standards-Version: 3.9.1
+
+Package: webengine-spv
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}, webengine (>= 0.10), python-psycopg2 (>= 2.0.5), webengine-front, python-sjutils (>= 1.17.1)
+Recommends: sjconf-webengine-spv
+XB-Python-Version: ${python:Versions}
+Description: Plugin spv for WebEngine
+ Provides a WebEngine plugin to view status of checks in database.
+
+Package: sjconf-webengine-spv
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}, webengine-spv (= ${binary:Version}), sjconf1 (>= 1.2)
+XB-Python-Version: ${python:Versions}
+Description: Sjconf plugin for WebEngine spv
+ Sjconf plugin for webengine-spv WebEngine plugin.
+
+Package: webengine-spv-data
+Architecture: all
+Depends: ${misc:Depends}
+Suggests: postgresql
+Replaces: spv-data
+Description: SmartJog schema for supervision
+ Provides SQL schemas and tools to load them into a postgres database.

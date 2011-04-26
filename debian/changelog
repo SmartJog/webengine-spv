@@ -1,0 +1,263 @@
+webengine-spv (0.12.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Now released under the LGPL-2.1.
+
+ -- Rémi Cardona <remi.cardona@smartjog.com>  Tue, 26 Apr 2011 15:21:01 +0200
+
+webengine-spv (0.12.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Remove now useless packages.
+  * Clean up Uploaders.
+  * Bump Standards-Version to 3.9.1.
+  * Bump debhelper compat to 7.
+  * Add a dependency on webengine-spv-collect-compat.
+
+ -- Rémi Cardona <remi.cardona@smartjog.com>  Tue, 26 Apr 2011 12:37:13 +0200
+
+webengine-spv (0.11.0-1) unstable; urgency=low
+
+  * New upstream release, closes: #3737, #3927, #3947, #3942, #3098,
+    #3033, #4018, #4019, #4029.
+
+ -- Nicolas Noirbent <nicolas.noirbent@smartjog.com>  Wed, 09 Mar 2011 17:29:57 +0100
+
+webengine-spv (0.10.2-1) unstable; urgency=low
+
+  * New upstream release, closes: #3618, #3620.
+
+ -- Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>  Wed, 27 Oct 2010 15:06:52 +0200
+
+webengine-spv (0.10.1-1) unstable; urgency=low
+
+  [ Matthieu Bouron ]
+  * Add myself to Uploaders.
+
+  [ Nicolas Noirbent ]
+  * New upstream release, closes: #3477, #3497.
+
+ -- Nicolas Noirbent <nicolas.noirbent@smartjog.com>  Wed, 20 Oct 2010 18:58:15 +0200
+
+webengine-spv (0.10.0-1) unstable; urgency=low
+
+  * New upstream release, closes: #3337, #3401.
+  * Added myself to Uploaders.
+
+ -- Rémi Cardona <remi.cardona@smartjog.com>  Tue, 24 Aug 2010 10:35:08 +0200
+
+webengine-spv (0.9.1-1) unstable; urgency=low
+
+  * New upstream release, closes: #3302.
+
+ -- Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>  Mon, 05 Jul 2010 16:23:58 +0200
+
+webengine-spv (0.9.0-1) unstable; urgency=low
+
+  [ Mathieu Dupuy ]
+  * New upstream release, closes: #2874.
+
+  [ Maxime Mouial ]
+  * Add webengine-spv-data, refs: #3280.
+
+ -- Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>  Fri, 02 Jul 2010 16:23:28 +0200
+
+webengine-spv (0.8.5-1) unstable; urgency=low
+
+  [ Gilles Dartiguelongue ]
+  * New upstream release.
+
+ -- Philippe Bridant <philippe.bridant@smartjog.com>  Mon, 17 May 2010 13:49:05 +0200
+
+webengine-spv (0.8.4-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Philippe Bridant <philippe.bridant@smartjog.com>  Mon, 17 May 2010 11:35:27 +0200
+
+webengine-spv (0.8.3-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Philippe Bridant <philippe.bridant@smartjog.com>  Wed, 12 May 2010 14:56:42 +0200
+
+webengine-spv (0.8.2-1) unstable; urgency=low
+
+  [ Gilles Dartiguelongue ]
+  * New upstream release.
+  * Updated dependency on python-sjutils (>= 1.17.1).
+
+ -- Philippe Bridant <philippe.bridant@smartjog.com>  Mon, 03 May 2010 19:08:42 +0200
+
+webengine-spv (0.8.1-1) unstable; urgency=low
+
+  * New upstream release, closes: #3090.
+
+ -- Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>  Wed, 28 Apr 2010 11:59:12 +0200
+
+webengine-spv (0.8.0-1) unstable; urgency=low
+
+  [ Gilles Dartiguelongue ]
+  * Updated dependency on python-central (>= 0.6).
+  * Changed XS-Python-Version to >=2.5.
+  * Raise Standards-Version to 3.8.4.
+  * Clean up Uploaders.
+  * Fix typo in package description.
+
+  [ Rémi Cardona ]
+  * New upstream release, closes: #3072, #3073, #3035.
+  * Run pycentral on all packages that ship python files.
+
+  [ Philippe Bridant ]
+  * Removed sjconf1 from Build-Depends.
+
+ -- Rémi Cardona <remi.cardona@smartjog.com>  Fri, 16 Apr 2010 15:01:43 +0200
+
+webengine-spv (0.7.3-1) unstable; urgency=low
+
+  * Fix typo in webengine-spv-hardware short description.
+  * Fix copypasta mistake in webengine-spv-network short description.
+  * New upstream release, closes: #2975, #2974,
+  * Minor fix to the webengine-spv-rxtx description.
+
+ -- Nicolas Noirbent <nicolas.noirbent@smartjog.com>  Mon, 22 Feb 2010 16:50:37 +0100
+
+webengine-spv (0.7.2-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Thomas Souvignet <thomas.souvignet@smartjog.com>  Mon, 25 Jan 2010 18:27:32 +0100
+
+webengine-spv (0.7.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Added dependency on Webengine >= 0.10.0
+
+ -- Thomas Souvignet <thomas.souvignet@smartjog.com>  Tue, 19 Jan 2010 17:28:02 +0100
+
+webengine-spv (0.7.0-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Philippe Bridant <philippe.bridant@smartjog.com>  Mon, 18 Jan 2010 10:20:45 +0100
+
+webengine-spv (0.6.1-1) unstable; urgency=low
+
+  * new upstream release.
+
+ -- Philippe Bridant <philippe.bridant@smartjog.com>  Thu, 14 Jan 2010 18:09:43 +0100
+
+webengine-spv (0.6.0-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Philippe Bridant <philippe.bridant@smartjog.com>  Thu, 14 Jan 2010 16:03:47 +0100
+
+webengine-spv (0.5.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * webengine-spv-hardware: remove useless dependency on python-sjutils.
+
+ -- Nicolas Noirbent <nicolas.noirbent@smartjog.com>  Tue, 12 Jan 2010 12:01:06 +0100
+
+webengine-spv (0.5.0-1) unstable; urgency=low
+
+  * New upstream release, closes: #2844, #2845, #2851, #2855, #2849.
+
+ -- Nicolas Noirbent <nicolas.noirbent@smartjog.com>  Mon, 11 Jan 2010 18:06:19 +0100
+
+webengine-spv (0.4.0-1) unstable; urgency=low
+
+  [ Thomas Souvignet ]
+  * Added myself to Uploaders.
+
+  [ Nicolas Noirbent ]
+  * Updated dependency on python-sjutils (>= 1.14), for flatten_dict().
+
+  [ Gilles Dartiguelongue ]
+  * New upstream release, closes: #2831, #2828.
+
+ -- Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>  Tue, 05 Jan 2010 16:30:02 +0100
+
+webengine-spv (0.3.0-1) unstable; urgency=low
+
+  [ Nicolas Noirbent ]
+  * New upstream release, closes: #2725.
+  * Updated webengine-spv.install for #2725.
+  * Decreased dependency on python-psycopg2 to 2.0.5 to allow installing
+    on a RxTx.
+  * Added new webengine-spv-sjconf package, closes: #2726.
+
+  [ Benoit Mauduit ]
+  * Add myself to Uploaders.
+  * Added new webengine-spv-dell package, closes: #2729.
+
+  [ Guillaume Camera ]
+  * Add myself to Uploaders.
+  * Added new webengine-spv-hardware package, closes: #2730.
+  * Added dependency to python-sjutils.
+  * Added new webengine-spv-network package, closes: #2744.
+
+  [ Anthony Mavic ]
+  * Add myself to uploaders
+  * Added new webengine-spv-system package, closes: #2735.
+
+  [ Victor Goya ]
+  * Add myself to uploaders.
+  * Added new webengine-spv-rxtx package, closes: #2733.
+  * Added dependency to python-sjtools, closes: #2737.
+
+  [ Gilles Dartiguelongue ]
+  * Replace use of gdartigu by gilles.dartiguelongue.
+  * Replace dummy package descriptions in control.
+
+ -- Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>  Fri, 11 Dec 2009 16:47:41 +0100
+
+webengine-spv (0.2.4-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Philippe Bridant <philippe.bridant@smartjog.com>  Fri, 20 Nov 2009 09:03:20 +0100
+
+webengine-spv (0.2.3-1) unstable; urgency=low
+
+  [ Gilles Dartiguelongue ]
+  * New upstream release.
+  * Add myself to Uploaders.
+  * Add gettext to Build-Depends.
+
+  [ Nicolas Noirbent ]
+  * Updated dependency on python-psycopg2 (>= 2.0.7), closes: #2445
+  * Added myself to Uploaders.
+  * Changed maintainer to P. Bridant.
+
+  [ Philippe Bridant ]
+  * Depend from webengine 0.5.0-1 to match webengine 0.5.0 security behaviour modifications
+
+ -- Nicolas Noirbent <nicolas.noirbent@smartjog.com>  Tue, 06 Oct 2009 18:32:57 +0200
+
+webengine-spv (0.2.2-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>  Tue, 30 Jun 2009 11:44:49 +0200
+
+webengine-spv (0.2.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Thomas Meson <thomas.meson@smartjog.com>  Thu, 25 Jun 2009 15:26:12 +0200
+
+webengine-spv (0.2.0-1) unstable; urgency=low
+
+  * New upstream release
+  * Fixed wrong sjconf postinst/prerm
+  * Add dependency on webengine-front.
+
+ -- Thomas Meson <thomas.meson@smartjog.com>  Mon, 22 Jun 2009 12:08:08 +0200
+
+webengine-spv (0.1.0-1) unstable; urgency=low
+
+  * Initial release.
+
+ -- Thomas Meson <thomas.meson@smartjog.com>  Wed, 13 May 2009 12:41:13 +0200

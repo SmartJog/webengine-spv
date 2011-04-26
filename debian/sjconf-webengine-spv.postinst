@@ -1,0 +1,21 @@
+#!/bin/sh
+# PostInstall script for WebEngine.
+
+set -e
+
+#DEBHELPER#
+
+if ! sjconf --list-plugins | grep "^Plugin webengine-spv$" > /dev/null
+then
+    sjconf --install-conf --link /etc/webengine/sjconf/confs/webengine-spv.conf
+    if [ -e /etc/webengine/sjconf/templates/webengine-spv/webengine-spv.conf ]
+    then
+        sjconf --install-template --link /etc/webengine/sjconf/templates/webengine-spv
+    fi
+    sjconf --install-plugin --link /usr/share/sjconf-webengine-spv/webengine-spv.py
+    sjconf --enable-plugin webengine-spv
+    sjconf --deploy --restart webengine-spv
+fi
+
+
+exit 0

@@ -1,0 +1,52 @@
+webengine-spv.conf
+webengine-spv
+%%mtime
+
+%!target : man
+%!encoding : utf-8
+%!postproc(man) : "^(\.TH.*) 1 "  "\1 5 "
+
+= NAME =
+
+/etc/webengine/webengine-spv.conf - a configuration file for
+**webengine-spv** webengine plugin.
+
+= DESCRIPTION =
+
+**/etc/webengine/webengine-spv.conf** is a configuration file in INI format.
+It must contain a main **database** section with the following mandatory keys:
+
+: **host** == //localhost//
+The network host of the supervision database.
+
+: **port** == //5432//
+The network port of the supervision database.
+
+: **user** == //spv//
+The user needed to connect to the database.
+
+: **password** == //spv//
+The password needed to connect to the database.
+
+: **dbname** == //rxtx//
+The database name to use in order to fetch data.
+
+= EXAMPLE =
+
+Here is a sample configuration:
+
+	**[database]**
+	**host** = //localhost//
+	**port** = //5432//
+	**user** = //spv//
+	**password** = //spv//
+	**dbname** = //rxtx//
+
+= AUTHOR =
+
+The webengine-spv plugin and this manual man page have been written
+by the **Smartjog** company.
+
+= SEE ALSO =
+
+**sjconf**(8), **webengine-spv.conf**(5)
