@@ -5,3 +5,4 @@ debian/tmp/usr/share/webengine/app/webengine/spv/locale
 debian/tmp/usr/share/man/man7
 debian/tmp/etc/webengine/
 debian/tmp/usr/share/man/man5
+debian/tmp/usr/share/doc

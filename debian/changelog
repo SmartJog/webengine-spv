@@ -1,8 +1,9 @@
 webengine-spv (0.12.2~dev-1) unstable; urgency=low
 
   * New upstream release.
+  * Added README.rst to webengine-spv's documentation directory.
 
- -- Nicolas Noirbent <nicolas.noirbent@smartjog.com>  Wed, 27 Apr 2011 14:44:40 +0200
+ -- Nicolas Noirbent <nicolas.noirbent@smartjog.com>  Wed, 27 Apr 2011 15:02:36 +0200
 
 webengine-spv (0.12.1-1) unstable; urgency=low
 
