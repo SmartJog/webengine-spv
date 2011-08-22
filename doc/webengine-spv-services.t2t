@@ -43,7 +43,6 @@ Returns checks, groups and objects from supervision database.
     'get_object_infos' (Boolean, default False) get additional informations attached to the requested objects
     'get_check_infos' (Boolean, default False) get additional informations attached to the request checks
     'get_check_groups' (Boolean, default False) get per check groups
-    'get_detailed_infos' (Boolean, default True) get detailed informations (returns dictionnary with DB entries ID, etc..)
     'next_check_expired' (Boolean, default False) require check that are new
     'update_next_check' (Boolean, default False) schedule next iteration of the checks
 
@@ -65,7 +64,7 @@ Returns checks, groups and objects from supervision database.
                     'value'     : String},
             },
             'groups' : {
-                'grp_id' : {
+                //grp_id//: {
                     'grp_id' : Integer,
                     'name'   : String,
                 }, ...
@@ -92,8 +91,8 @@ Returns checks, groups and objects from supervision database.
 
         },
     },
-    'status': [
-                {
+    'status': {
+        //status_id// {
                     'cg_id'         : Integer,
                     'chk_id'        : Integer,
                     'grp_id'        : Integer,
@@ -114,7 +113,7 @@ Returns checks, groups and objects from supervision database.
                             'value'     : String},
                     },
                 },
-    ]
+    }
 }
 
 
@@ -156,12 +155,12 @@ Returns groups from the supervision database filtered by //params//
 //returns//: list of groups
     [{
         'id': Integer,
-        'name': String
+        'name': String,
         'objects': {
-            @obj_id: {
-                @obj_id: Integer,
-                address: String,
-                creation_date: database.date
+            //obj_id//: {
+                'obj_id': Integer,
+                'address': String,
+                'creation_date': database.date
             }, ...
         }
     }, ... ]
@@ -186,10 +185,10 @@ Returns objects from the supervision database filtered by //params//
         'obj_id': Integer,
         'address': String,
         'creation_date': database.date
-        'groups' : {
-            'grp_id' : {
-                'grp_id' : Integer,
-                'name'   : String,
+        'groups': {
+            'grp_id': {
+                grp_id: Integer,
+                name: String,
             }, ...
         }
     }, ... ]
@@ -252,7 +251,7 @@ Create new objects with provided data.
           failed object creation will be rolled back.
     {
         'errors': [{
-            //object//-keys: //object//-values,
+            //object-keys//: //object-values//,
             'message': String
             }, ... ],
         //obj_id//: {
@@ -290,7 +289,7 @@ Create new checks with provided data.
           failed check creation will be rolled back.
     {
         'errors': [{
-            //object//-keys: //object//-values,
+            //object-keys//: //object-values//,
             'message': String
             }, ... ],
         //chk_id//: {
@@ -317,7 +316,7 @@ Create new groups.
           failed group creation will be rolled back.
     {
         'errors': [{
-            //object//-keys: //object//-values,
+            //object-keys//: //object-values//,
             'message': String
             }, ... ],
         //group_id//: {
@@ -392,8 +391,8 @@ Group and objects could be specified using their ids or unique string identifier
 
 //params//: dictionary of the form:
     {
-        'group': String or Integer,
-        'objects' : [ String or Integer, ... ]
+        'group': Integer or String,
+        'objects' : [ Integer or String, ... ]
     }
 
 //returns//: dictionary containing a list of errors.
@@ -416,8 +415,8 @@ Group and objects could be specified using their ids or unique string identifier
 
 //params//: dictionary of the form:
     {
-        'group': String or Integer,
-        'objects' : [ String or Integer, ... ]
+        'group': Integer or String,
+        'objects' : [ Integer or String, ... ]
     }
 
 //returns//: dictionary containing a list of errors.

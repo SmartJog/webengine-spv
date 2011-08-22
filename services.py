@@ -54,8 +54,8 @@ def get_checks(pg_manager, ctx_list, _request, params=None):
                 },
                 'groups' : {
                     'grp_id': {
-                        'grp_id': Integer,
-                        'name': String,
+                        'grp_id' : Integer,
+                        'name'   : String,
                     }, ...
                 }
             },
@@ -263,9 +263,9 @@ def get_status(pg_manager, ctx_list, _request, params=None):
                         'value'     : String},
                 },
                 'groups' : {
-                    'grp_id: {
-                        'grp_id': Integer,
-                        'name': String,
+                    @grp_id: {
+                        'grp_id' : Integer,
+                        'name'   : String,
                     }, ...
                 }
             },
@@ -452,9 +452,9 @@ def _get_groups(pg_manager, ctx_list, _request, params=None):
             'name': String
             'objects': {
                 @obj_id: {
-                    @obj_id: Integer,
-                    address: String,
-                    creation_date: database.date
+                    'obj_id': Integer,
+                    'address': String,
+                    'creation_date': database.date
                 }, ...
             }
         }, ... ]
@@ -503,15 +503,16 @@ def get_groups(pg_manager, ctx_list, _request, params=None):
     @params: dictionary of filters to apply to get groups
         'group_id' (Integer)
         'group_name' (String)
+        'get_objects' (Boolean, default False)
     @returns: list of groups
         [{
             'id': Integer,
             'name': String,
             'objects': {
                 @obj_id: {
-                    @obj_id: Integer,
-                    address: String,
-                    creation_date: database.date
+                    'obj_id': Integer,
+                    'address': String,
+                    'creation_date': database.date
                 }, ...
             }
         }, ... ]
