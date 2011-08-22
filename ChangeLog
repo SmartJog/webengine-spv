@@ -1,7 +1,8 @@
-Version 0.12.2~dev
+Version 0.13.0~dev
 
 	* Fix the Authors section of README.rst.
 	* Add missing COPYING.
+	* Change reschedule_check to allow adding a delay, closes: #4626.
 
 Version 0.12.1 Released on 2011/04/26
 

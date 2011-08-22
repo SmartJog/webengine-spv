@@ -629,13 +629,22 @@ def acknowledge_status(pg_manager, ctx_list, _request, status_id):
 
 @exportable
 @webengine_pgconn('/etc/webengine/webengine-spv.conf')
-def reschedule_check(pg_manager, ctx_list, _request, status_id):
-    """ Reschedule check immediately for @status_id check. """
+def reschedule_check(pg_manager, ctx_list, _request, status_id, delay=None):
+    """ Reschedule check immediately for @status_id check.
+
+    @delay: a datetime.timedelta object, adds a delay instead of rescheduling
+            the check immediately.
+    """
+
+    if delay:
+        time = "now() + ('%s seconds' AS INTERVAL)" % delay.seconds
+    else:
+        time = "now()"
 
     if hasattr(status_id, '__iter__'):
-        query = "UPDATE status SET next_check=now() WHERE status_id IN %(status_id)s"
+        query = "UPDATE status SET next_check=" + time + " WHERE status_id IN %(status_id)s"
     else:
-        query = "UPDATE status SET next_check=now() WHERE status_id=%(status_id)s"
+        query = "UPDATE status SET next_check=" + time + " WHERE status_id=%(status_id)s"
     pg_manager.execute(ctx_list[0], query, {'status_id' : hasattr(status_id, '__iter__') and tuple(status_id) or status_id})
     pg_manager.commit(ctx_list[0])
 

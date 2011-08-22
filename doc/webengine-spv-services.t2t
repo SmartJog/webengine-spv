@@ -203,9 +203,13 @@ Acknowledge status for //status_id// check.
 
 == reschedule_check ==
 
-The method reschedule_check takes the following list of parameters: status_id
+The method reschedule_check takes the following list of parameters: status_id, delay=None
 
 Reschedule check immediately for //status_id// check.
+
+//delay//: a datetime.timedelta object, adds a delay instead of rescheduling
+        the check immediately.
+
 
 == set_checks_status ==
 
