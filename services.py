@@ -638,7 +638,7 @@ def reschedule_check(pg_manager, ctx_list, _request, status_id, delay=None):
     """
 
     if delay:
-        time = "now() + ('%s seconds' AS INTERVAL)" % delay.seconds
+        time = "now() + CAST ('%s seconds' AS INTERVAL)" % delay.seconds
     else:
         time = "now()"
 
