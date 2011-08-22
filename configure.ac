@@ -1,13 +1,11 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(webengine-spv, 0.13.0~dev)
-
-dnl 2.52 is quite realistic
-AC_PREREQ(2.52)
+AC_PREREQ([2.67])
+AC_INIT([webengine-spv],[0.13.0~dev])
 
 AM_INIT_AUTOMAKE([foreign])
-AM_PATH_PYTHON
+AM_PATH_PYTHON([2.5])
 
-AC_PROG_SJCONF
+SJ_PROG_SJCONF
 AC_PATH_PROG(MSGFMT, msgfmt)
 AC_PATH_PROG(TXT2TAGS, txt2tags)
 
