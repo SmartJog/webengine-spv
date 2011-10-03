@@ -3,8 +3,8 @@ Section: misc
 Priority: optional
 Maintainer: Philippe Bridant <philippe.bridant@smartjog.com>
 Uploaders: Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>, Nicolas Noirbent <nicolas.noirbent@smartjog.com>, Anthony Mavic <anthony.mavic@smartjog.com>, Thomas Souvignet <thomas.souvignet@smartjog.com>, Clément Bœsch <clement.boesch@smartjog.com>, Rémi Cardona <remi.cardona@smartjog.com>, Matthieu Bouron <matthieu.bouron@smartjog.com>, Thomas Coudray <thomas.coudray@smartjog.com>
-Build-Depends: debhelper (>= 7), cdbs, python-central (>= 0.6), txt2tags, gettext
-XS-Python-Version: >= 2.5
+Build-Depends: debhelper (>= 8), cdbs (>= 0.4.89), python-central (>= 0.6), txt2tags, gettext
+XS-Python-Version: >= 2.6
 Standards-Version: 3.9.1
 
 Package: webengine-spv
