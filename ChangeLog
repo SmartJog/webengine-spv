@@ -1,4 +1,4 @@
-Version 0.13.1~dev
+Version 0.13.1 Released on 2011/10/03
 
 	* Fix get_checks method, when 'params' is None, closes: #4884.
 	* Fix unit test get_status and get_checks.

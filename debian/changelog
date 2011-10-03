@@ -1,4 +1,4 @@
-webengine-spv (0.13.1~dev-1) unstable; urgency=low
+webengine-spv (0.13.1-1) unstable; urgency=low
 
   [ Thomas Coudray ]
   * Added myself to Uploaders.
@@ -8,7 +8,7 @@ webengine-spv (0.13.1~dev-1) unstable; urgency=low
   * Update debian/control Build-Depends, XS-Python-Version.
   * Update debian/compat version.
 
- -- Rémi Cardona <remi.cardona@smartjog.com>  Mon, 03 Oct 2011 11:55:04 +0200
+ -- Rémi Cardona <remi.cardona@smartjog.com>  Mon, 03 Oct 2011 12:03:48 +0200
 
 webengine-spv (0.13.0-1) unstable; urgency=low
 
