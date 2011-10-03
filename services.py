@@ -105,6 +105,9 @@ def get_checks(pg_manager, ctx_list, _request, params=None):
         ]
     }
     """
+    if params is None:
+        params = {}
+
     ret = get_status(_request, params)
 
     # Reorganize ret['@categorie'][@id][@key] to match old behavior ('get_detailed_infos' : False)

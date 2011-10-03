@@ -1,3 +1,10 @@
+webengine-spv (0.13.1~dev-1) unstable; urgency=low
+
+  * Added myself to Uploaders.
+  * New upstream release, closes: #4884.
+
+ -- Thomas Coudray <thomas.coudray@smartjog.com>  Fri, 30 Sep 2011 13:02:37 +0000
+
 webengine-spv (0.13.0-1) unstable; urgency=low
 
   [ Nicolas Noirbent ]
