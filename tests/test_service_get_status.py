@@ -192,7 +192,7 @@ class ServiceTest(unittest.TestCase):
     def test_update_check(self):
         """ ['get_status'] Reschedule batch of/one status_id and check them/it. """
         self._get_status_tests_create_data()
-        ret = self.imp.call('spv.services', 'get_status', {'status': ['FINISHED', 'ERROR']})
+        ret = self.imp.call('spv.services', 'get_status')
 
         id1 = ret['status'][ret['status'].keys()[0]]['status_id']
         id2 = ret['status'][ret['status'].keys()[1]]['status_id']
