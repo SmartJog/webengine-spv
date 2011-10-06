@@ -215,6 +215,9 @@ def _get_queries_and_result_rows(pg_manager, ctx_list, defaultparams):
                         where += [field + "=%(" + [key for key, v in defaultparams.iteritems() if v == value][0] + ")s"]
                         break
 
+    if defaultparams.get('next_check_expired'):
+        where += ["(status.next_check<now() OR status.next_check IS NULL)"]
+
     if where:
         query_where = " WHERE " + " AND ".join(where)
 
