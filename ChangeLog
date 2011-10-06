@@ -1,4 +1,4 @@
-Version 0.13.2~dev
+Version 0.13.2 Released on 2011/10/06
 
 	* Fix next_check_expired parameter handling, closes: #4950.
 
