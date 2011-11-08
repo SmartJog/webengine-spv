@@ -1,0 +1,21 @@
+GRANT ALL ON SCHEMA spv                 TO webengine;
+GRANT ALL ON check_infos                TO webengine;
+GRANT ALL ON check_infos_cinfo_id_seq   TO webengine;
+GRANT ALL ON checks                     TO webengine;
+GRANT ALL ON checks_chk_id_seq          TO webengine;
+GRANT ALL ON checks_group               TO webengine;
+GRANT ALL ON checks_group_cg_id_seq     TO webengine;
+GRANT ALL ON groups                     TO webengine;
+GRANT ALL ON groups_grp_id_seq          TO webengine;
+GRANT ALL ON object_infos               TO webengine;
+GRANT ALL ON object_infos_oinfo_id_seq  TO webengine;
+GRANT ALL ON objects                    TO webengine;
+GRANT ALL ON objects_group              TO webengine;
+GRANT ALL ON objects_group_og_id_seq    TO webengine;
+GRANT ALL ON objects_obj_id_seq         TO webengine;
+GRANT ALL ON status                     TO webengine;
+GRANT ALL ON status_infos               TO webengine;
+GRANT ALL ON status_infos_sinfo_id_seq  TO webengine;
+GRANT ALL ON status_status_id_seq       TO webengine;
+
+ALTER USER webengine set search_path = spv, public, webengine;
