@@ -4,6 +4,7 @@ Version 0.13.3~dev
 	* Update database schema with new defaults and constraints.
 	* Drop old migration snippets and unrelated schema updates.
 	* Add unit test for get_checks, when 'params' is None, closes: #4001.
+	* Fix a typo in test_service.py and test_service_get_checks.py.
 
 Version 0.13.2 Released on 2011/10/06
 

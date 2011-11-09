@@ -159,7 +159,7 @@ class ServiceTest(unittest.TestCase):
         self. _check_get_status_info(ret, 'checks', 'check_infos', 'chk_id')
 
     def test_get_status_detailed_infos(self):
-        """ ['get_checks'] test get_status  with 'get_detailed_infos' to False"""
+        """ ['get_checks'] Test get_status  with 'get_detailed_infos' to False"""
         groups, objects, checks =  self._get_status_tests_create_data()
         ret = self.imp.call('spv.services', 'get_checks', {'group_id': groups.keys()[0],
            'get_check_infos': True, 'get_detailed_infos': False})

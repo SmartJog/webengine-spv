@@ -145,7 +145,7 @@ class ServiceTest(unittest.TestCase):
         self.assertFalse('errors' in checks)
 
     def test_error_create_checks(self):
-        """ create a wrong checks and test the failure """
+        """ Create a wrong checks and test the failure """
         # create
         checks = self.imp.call('spv.services', 'create_checks', [
             {'plugin': 'toto', 'plugin_check': 'toto', 'name': 'toto',
