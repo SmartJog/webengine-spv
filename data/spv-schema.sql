@@ -339,13 +339,13 @@ CREATE TABLE status (
     status_id integer DEFAULT nextval(('spv.status_status_id_seq'::text)::regclass) NOT NULL,
     cg_id integer NOT NULL,
     og_id integer NOT NULL,
-    check_status character varying,
+    check_status character varying DEFAULT 'INITIAL'::character varying NOT NULL,
     check_message character varying,
     last_check timestamp without time zone DEFAULT now(),
     next_check timestamp without time zone DEFAULT now(),
     seq_id integer DEFAULT 0 NOT NULL,
-    status_acknowledged_date timestamp without time zone,
-    status_changed_date timestamp without time zone,
+    status_acknowledged_date timestamp without time zone DEFAULT now(),
+    status_changed_date timestamp without time zone DEFAULT now(),
     CONSTRAINT positive_seqence CHECK ((seq_id >= 0))
 );
 
@@ -550,19 +550,11 @@ ALTER TABLE ONLY check_infos
 
 
 --
--- Name: checks_group_grp_id_chk_id_uniq_key; Type: CONSTRAINT; Schema: spv; Owner: spv; Tablespace: 
---
-
-ALTER TABLE ONLY checks_group
-    ADD CONSTRAINT checks_group_grp_id_chk_id_uniq_key UNIQUE (chk_id, grp_id);
-
-
---
 -- Name: checks_group_uniq_key; Type: CONSTRAINT; Schema: spv; Owner: spv; Tablespace: 
 --
 
 ALTER TABLE ONLY checks_group
-    ADD CONSTRAINT checks_group_uniq_key UNIQUE (cg_id, chk_id, grp_id);
+    ADD CONSTRAINT checks_group_uniq_key UNIQUE (chk_id, grp_id);
 
 
 --
@@ -606,19 +598,11 @@ ALTER TABLE ONLY object_infos
 
 
 --
--- Name: objects_group_grp_id_obj_id_uniq_key; Type: CONSTRAINT; Schema: spv; Owner: spv; Tablespace: 
---
-
-ALTER TABLE ONLY objects_group
-    ADD CONSTRAINT objects_group_grp_id_obj_id_uniq_key UNIQUE (obj_id, grp_id);
-
-
---
 -- Name: objects_group_uniq_key; Type: CONSTRAINT; Schema: spv; Owner: spv; Tablespace: 
 --
 
 ALTER TABLE ONLY objects_group
-    ADD CONSTRAINT objects_group_uniq_key UNIQUE (og_id, obj_id, grp_id);
+    ADD CONSTRAINT objects_group_uniq_key UNIQUE (obj_id, grp_id);
 
 
 --
@@ -683,6 +667,13 @@ ALTER TABLE ONLY status
 
 ALTER TABLE ONLY objects
     ADD CONSTRAINT uniq_address UNIQUE (address);
+
+
+--
+-- Name: status_infos_status_key_idx; Type: INDEX; Schema: spv; Owner: spv; Tablespace: 
+--
+
+CREATE INDEX status_infos_status_key_idx ON status_infos USING btree (key);
 
 
 --

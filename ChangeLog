@@ -1,6 +1,7 @@
 Version 0.13.3~dev
 
 	* Replace database schema by a postgres dump.
+	* Update database schema with new defaults and constraints.
 
 Version 0.13.2 Released on 2011/10/06
 
