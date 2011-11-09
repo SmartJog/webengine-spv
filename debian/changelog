@@ -1,8 +1,9 @@
 webengine-spv (0.13.3~dev-1) unstable; urgency=low
 
-  * New upstream release.
+  [ Thomas Coudray ]
+  * New upstream release, closes: #4001, #4950.
 
- -- Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>  Wed, 09 Nov 2011 13:55:36 +0100
+ -- Thomas Coudray <thomas.coudray@smartjog.com>  Wed, 09 Nov 2011 16:13:29 +0000
 
 webengine-spv (0.13.2-1) unstable; urgency=low
 

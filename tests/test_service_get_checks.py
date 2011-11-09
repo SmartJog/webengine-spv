@@ -165,6 +165,11 @@ class ServiceTest(unittest.TestCase):
            'get_check_infos': True, 'get_detailed_infos': False})
         self.assertEqual(ret['checks'][ret['checks'].keys()[0]]['check_infos'], {'key_toto': 'value_toto'})
 
+    def test_get_checks_params_none(self):
+        """ ['get_checks'] Test get_status with params not specified """
+        self._get_status_tests_create_data()
+        ret = self.imp.call('spv.services', 'get_checks', None)
+        self.assertTrue(ret != None)
     #
     # CREATE TEST
     #

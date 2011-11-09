@@ -3,6 +3,7 @@ Version 0.13.3~dev
 	* Replace database schema by a postgres dump.
 	* Update database schema with new defaults and constraints.
 	* Drop old migration snippets and unrelated schema updates.
+	* Add unit test for get_checks, when 'params' is None, closes: #4001.
 
 Version 0.13.2 Released on 2011/10/06
 
