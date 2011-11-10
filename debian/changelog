@@ -1,9 +1,9 @@
-webengine-spv (0.13.3~dev-1) unstable; urgency=low
+webengine-spv (0.13.3-1) unstable; urgency=low
 
   [ Thomas Coudray ]
   * New upstream release, closes: #4001.
 
- -- Thomas Coudray <thomas.coudray@smartjog.com>  Wed, 09 Nov 2011 16:13:29 +0000
+ -- Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>  Thu, 10 Nov 2011 15:44:21 +0100
 
 webengine-spv (0.13.2-1) unstable; urgency=low
 
