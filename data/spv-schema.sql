@@ -55,7 +55,7 @@ CREATE FUNCTION check_insert() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 BEGIN
-    EXECUTE new_check(NEW.cg_id, NEW.grp_id);
+    EXECUTE new_check(NEW.chk_id, NEW.grp_id);
     RETURN NEW;
 END;$$;
 
@@ -155,7 +155,7 @@ CREATE FUNCTION object_insert() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 BEGIN
-  EXECUTE new_object(NEW.og_id, NEW.grp_id);
+  EXECUTE new_object(NEW.obj_id, NEW.grp_id);
   RETURN NEW;
 END;$$;
 

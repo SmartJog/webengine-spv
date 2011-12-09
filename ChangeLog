@@ -1,3 +1,7 @@
+Version 0.13.4~dev
+
+	* Fix invalid field name in SQL functions.
+
 Version 0.13.3 Released on 2011/11/10
 
 	* Replace database schema by a postgres dump.
