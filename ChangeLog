@@ -1,6 +1,7 @@
 Version 0.13.4~dev
 
 	* Fix invalid field name in SQL functions.
+	* Prevent group_add_objects() from creating groups, closes: #5215.
 
 Version 0.13.3 Released on 2011/11/10
 

@@ -1035,7 +1035,7 @@ def _group_manage_objects(pg_manager, ctx_list, action, group, objects):
             return infos
         grp_id = group
     elif isinstance(group, str):
-        grps = _get_groups(pg_manager, ctx_list, None, {'name': group})
+        grps = _get_groups(pg_manager, ctx_list, None, {'group_name': group})
         if not len(grps) > 0:
             infos['errors'].append({'type': 'group', 'name': group, 'message': 'Not found in database'})
             return infos
