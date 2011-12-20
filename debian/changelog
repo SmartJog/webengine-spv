@@ -1,8 +1,8 @@
-webengine-spv (0.13.4~dev-1) unstable; urgency=low
+webengine-spv (0.13.4-1) unstable; urgency=low
 
   * New upstream release, closes: #5215.
 
- -- Rémi Cardona <remi.cardona@smartjog.com>  Mon, 19 Dec 2011 18:25:55 +0100
+ -- Rémi Cardona <remi.cardona@smartjog.com>  Tue, 20 Dec 2011 09:37:20 +0100
 
 webengine-spv (0.13.3-1) unstable; urgency=low
 
