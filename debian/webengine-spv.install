@@ -1,7 +1,4 @@
-debian/tmp/usr/share/webengine/medias/
-debian/tmp/usr/share/webengine/templates/
 debian/tmp/usr/share/webengine/app/webengine/spv/*.py
-debian/tmp/usr/share/webengine/app/webengine/spv/locale
 debian/tmp/usr/share/man/man7
 debian/tmp/etc/webengine/
 debian/tmp/usr/share/man/man5
