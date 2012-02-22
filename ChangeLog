@@ -1,6 +1,7 @@
 Version 0.14.0~dev
 
 	* Drop unmaintained administration interface.
+	* Change get_status in services.py to allow multiple spvd to work together, closes: #4478.
 
 Version 0.13.4 Released on 2011/12/20
 

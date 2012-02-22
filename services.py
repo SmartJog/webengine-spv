@@ -2,6 +2,7 @@ from webengine.utils.decorators import exportable
 from webengine.utils.decorators import webengine_pgconn
 from webengine.utils.log import logger
 import sjutils
+import psycopg2
 
 GROUP_FIELDS        = ['groups.grp_id', 'groups.name']
 OBJECT_FIELDS       = ['objects.obj_id', 'objects.address', 'objects.creation_date']
@@ -343,6 +344,10 @@ def get_status(pg_manager, ctx_list, _request, params=None):
     if params:
         defaultparams.update(params)
 
+    isolation_level = None
+    if defaultparams.get('update_next_check'):
+        isolation_level = pg_manager.get_isolation_level()
+        pg_manager.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE)
     ret = {'objects' : {}, 'checks' : {}, 'groups' : {}, 'status' : {}}
 
     rows, query_from, query_where = _get_queries_and_result_rows(pg_manager, ctx_list, defaultparams)
@@ -389,6 +394,8 @@ def get_status(pg_manager, ctx_list, _request, params=None):
                     {'status_id' : status['status_id'], 'repeat' : ret['checks'][status['chk_id']]['repeat'], 'seq_id' : status['seq_id']})
 
     pg_manager.commit(ctx_list[0])
+    if defaultparams.get('update_next_check'):
+        pg_manager.set_isolation_level(isolation_level)
     return ret
 
 @exportable
