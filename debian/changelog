@@ -1,8 +1,9 @@
 webengine-spv (0.14.0~dev-1) unstable; urgency=low
 
   * New upstream release, closes: #4478.
+  * Switch to dpkg-source 3.0 (quilt) format.
 
- -- Jonathan Billaud <jonathan.billaud@smartjog.com>  Wed, 28 Mar 2012 18:28:20 +0200
+ -- Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>  Thu, 29 Mar 2012 14:44:37 +0200
 
 webengine-spv (0.13.4-1) unstable; urgency=low
 
