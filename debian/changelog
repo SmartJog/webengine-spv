@@ -2,8 +2,9 @@ webengine-spv (0.14.0-2~dev) unstable; urgency=low
 
   * Webengine >= 0.13.0-2 provides a trigger that restarts apache2, drop
     the now redundant postinst/postrm scripts.
+  * Clean up Uploaders.
 
- -- Rémi Cardona <remi.cardona@smartjog.com>  Wed, 16 May 2012 15:12:42 +0200
+ -- Rémi Cardona <remi.cardona@smartjog.com>  Wed, 16 May 2012 15:14:13 +0200
 
 webengine-spv (0.14.0-1) unstable; urgency=low
 
