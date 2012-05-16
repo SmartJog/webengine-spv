@@ -9,7 +9,8 @@ Standards-Version: 3.9.1
 
 Package: webengine-spv
 Architecture: all
-Depends: ${misc:Depends}, ${python:Depends}, webengine (>= 0.10), python-psycopg2 (>= 2.0.5), webengine-front, python-sjutils (>= 1.17.1)
+Depends: ${misc:Depends}, ${python:Depends}, webengine (>= 0.13.0-2),
+ python-psycopg2 (>= 2.0.5), webengine-front, python-sjutils (>= 1.17.1)
 Recommends: sjconf-webengine-spv
 XB-Python-Version: ${python:Versions}
 Description: Plugin spv for WebEngine
