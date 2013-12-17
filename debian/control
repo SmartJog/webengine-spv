@@ -1,22 +1,23 @@
 Source: webengine-spv
 Section: misc
 Priority: optional
-Maintainer: Philippe Bridant <philippe.bridant@smartjog.com>
-Uploaders: Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>,
- Nicolas Noirbent <nicolas.noirbent@smartjog.com>,
- Anthony Mavic <anthony.mavic@smartjog.com>,
- Thomas Souvignet <thomas.souvignet@smartjog.com>,
- Clément Bœsch <clement.boesch@smartjog.com>,
- Rémi Cardona <remi.cardona@smartjog.com>,
- Matthieu Bouron <matthieu.bouron@smartjog.com>
-Build-Depends: debhelper (>= 8), cdbs (>= 0.4.89), python-central (>= 0.6), txt2tags, gettext
+Maintainer: Nicolas Delvaux <nicolas.delvaux@arkena.com>
+Build-Depends: debhelper (>= 8),
+               cdbs (>= 0.4.89),
+               python-central (>= 0.6),
+               txt2tags,
+               gettext
 XS-Python-Version: >= 2.6
 Standards-Version: 3.9.1
 
 Package: webengine-spv
 Architecture: all
-Depends: ${misc:Depends}, ${python:Depends}, webengine (>= 0.13.0-2),
- python-psycopg2 (>= 2.0.5), webengine-front, python-sjutils (>= 1.17.1)
+Depends: ${misc:Depends},
+         ${python:Depends},
+         webengine (>= 0.13.0-2),
+         python-psycopg2 (>= 2.0.5),
+         webengine-front,
+         python-sjutils (>= 1.17.1)
 Recommends: sjconf-webengine-spv
 XB-Python-Version: ${python:Versions}
 Description: Plugin spv for WebEngine
@@ -24,7 +25,10 @@ Description: Plugin spv for WebEngine
 
 Package: sjconf-webengine-spv
 Architecture: all
-Depends: ${misc:Depends}, ${python:Depends}, webengine-spv (= ${binary:Version}), sjconf1 (>= 1.2)
+Pre-Depends: sjconf1 (>= 1.13.0)
+Depends: ${misc:Depends},
+         ${python:Depends},
+         webengine-spv (= ${binary:Version})
 XB-Python-Version: ${python:Versions}
 Description: Sjconf plugin for WebEngine spv
  Sjconf plugin for webengine-spv WebEngine plugin.

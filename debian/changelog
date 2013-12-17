@@ -1,6 +1,8 @@
 webengine-spv (0.14.1~dev-1) unstable; urgency=low
 
   * New upstream release.
+  * Clean up the debian/control file.
+  * Fix sjconf arguments in scripts to match the new sjconf arguments.
 
  -- Gilles Dartiguelongue <gilles.dartiguelongue@smartjog.com>  Fri, 03 Aug 2012 14:02:33 +0200
 
