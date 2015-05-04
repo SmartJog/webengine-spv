@@ -20,7 +20,7 @@ The sjconf-webengine-spv plugin allows for handling the SmartJog **webengine-spv
 
 Here is the list of options, in order to configure access to the supervision Database:
 
-: **host** = //localhost//
+: **host** = ///var/run/postgresql//
 The network host of the supervision database.
 
 : **port** = //5432//
