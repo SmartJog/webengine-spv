@@ -1,4 +1,4 @@
-Version 0.14.1~dev
+Version 0.14.1 Released on 2015/05/04
 
 	* Add database schema reference document.
 	* Change the default DB host to the PostgreSQL Unix socket
