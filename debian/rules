@@ -1,14 +1,4 @@
 #!/usr/bin/make -f
-# -*- makefile -*-
-#
 
-include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/class/autotools.mk
-
-DEB_CONFIGURE_EXTRA_FLAGS := --without-sjconf
-DEB_DESTDIR := $(CURDIR)/debian/tmp
-
-PYTHON_PACKAGES := webengine-spv sjconf-webengine-spv
-
-$(patsubst %,binary-install/%,$(PYTHON_PACKAGES)) ::
-	dh_pycentral -p$(cdbs_curpkg)
+%:
+	dh $@ --with python2
