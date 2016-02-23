@@ -501,7 +501,7 @@ def _get_groups(pg_manager, ctx_list, _request, params=None):
             pg_manager.execute(ctx_list[0], query, [row[0]])
             objs = pg_manager.fetchall(ctx_list[0])
             for obj in objs:
-                groups[row[0]]['objects'][obj[0]] = {'obj_id': obj[0], 'address': obj[1], 'creation_date': obj[2]}
+                groups[row[0]]['objects'][obj[0]] = {'obj_id': obj[0], 'address': obj[1], 'creation_date': str(obj[2])}
             if not groups[row[0]]['objects']:
                 del groups[row[0]]['objects']
 

@@ -1,6 +1,6 @@
 Version 0.14.2~dev
 
-	* TODO
+	* Do not return Python datetime object
 
 Version 0.14.1 Released on 2015/05/04
 
