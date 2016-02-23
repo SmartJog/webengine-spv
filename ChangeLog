@@ -1,4 +1,4 @@
-Version 0.14.2~dev
+Version 0.14.2 Released on 2016/02/23
 
 	* Do not return Python datetime object
 
