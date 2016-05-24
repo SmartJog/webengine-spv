@@ -355,9 +355,9 @@ def get_status(pg_manager, ctx_list, _request, params=None):
     statuss = reduce(lambda dicts, row: dicts + [dict(zip(STATUS_FIELDS + GROUP_FIELDS + CHECK_FIELDS + OBJECT_FIELDS, row))], rows, [])
     for spvstatus in statuss:
         group  = dict(reduce(lambda pairs, key: pairs + ((key[len('groups.'):],  spvstatus[key]),), GROUP_FIELDS,  ()))
-        stat   = dict(reduce(lambda pairs, key: pairs + ((key[len('status.'):],  spvstatus[key]),), STATUS_FIELDS, ()))
+        stat   = dict(reduce(lambda pairs, key: pairs + ((key[len('status.'):],  str(spvstatus[key])),), STATUS_FIELDS, ()))
         check  = dict(reduce(lambda pairs, key: pairs + ((key[len('checks.'):],  spvstatus[key]),), CHECK_FIELDS,  ()))
-        obj    = dict(reduce(lambda pairs, key: pairs + ((key[len('objects.'):], spvstatus[key]),), OBJECT_FIELDS, ()))
+        obj    = dict(reduce(lambda pairs, key: pairs + ((key[len('objects.'):], str(spvstatus[key])),), OBJECT_FIELDS, ()))
 
         ret['groups'].setdefault(group['grp_id'], group)
         ret['checks'].setdefault(check['chk_id'], check)
@@ -594,7 +594,7 @@ def _get_objects(pg_manager, ctx_list, _request, params=None):
     rows = pg_manager.fetchall(ctx_list[0])
     objects = {}
     for row in rows:
-        objects[row[0]] = {"obj_id" : row[0], "address" : row[1], "creation_date" : row[2]}
+        objects[row[0]] = {"obj_id" : row[0], "address" : row[1], "creation_date" : str(row[2])}
         if defaultparams['get_object_groups']:
             if not 'groups' in objects[row[0]]:
                 objects[row[0]]['groups'] = {}
@@ -754,7 +754,7 @@ def create_objects(pg_manager, ctx_list, _request, objects):
             query = "INSERT INTO objects (address) VALUES (%(obj_address)s) RETURNING obj_id, address, creation_date"
             pg_manager.execute(ctx_list[0], query, {'obj_address': obj['address']})
             db_obj = pg_manager.fetchall(ctx_list[0])[0]
-            ret[db_obj[0]] = {'obj_id': db_obj[0], 'address': db_obj[1], 'creation_date': db_obj[2]}
+            ret[db_obj[0]] = {'obj_id': db_obj[0], 'address': db_obj[1], 'creation_date': str(db_obj[2])}
 
             # Insert object_infos
             if 'infos' in obj:
