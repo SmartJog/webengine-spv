@@ -3,6 +3,7 @@ from webengine.utils.decorators import webengine_pgconn
 from webengine.utils.log import logger
 import sjutils
 import psycopg2
+from functools import reduce
 
 GROUP_FIELDS        = ['groups.grp_id', 'groups.name']
 OBJECT_FIELDS       = ['objects.obj_id', 'objects.address', 'objects.creation_date']
@@ -138,15 +139,15 @@ def _get_infos(pg_manager, ctx_list, query, ret, defaultparams=None, which_categ
     categorie_infos = (which_categorie == 'status' and which_categorie or which_categorie[:-1]) + "_infos"
 
     # Initialize categorie_infos
-    for _id, categorie in ret[which_categorie].iteritems():
+    for _id, categorie in ret[which_categorie].items():
         if not categorie_infos in categorie:
             categorie[categorie_infos] = {}
 
     pg_manager.execute(ctx_list[0], query, defaultparams)
     for categorie_info in pg_manager.fetchall(ctx_list[0]):
-        categorie_info_record = dict(zip((fields[0].split('.')[1], fields[1].split('.')[1], fields[2].split('.')[1],
-                                          fields[3].split('.')[1]), categorie_info))
-        _id = [v for k, v in categorie_info_record.iteritems() if k in ('obj_id', 'chk_id', 'status_id')][0]
+        categorie_info_record = dict(list(zip((fields[0].split('.')[1], fields[1].split('.')[1], fields[2].split('.')[1],
+                                          fields[3].split('.')[1]), categorie_info)))
+        _id = [v for k, v in categorie_info_record.items() if k in ('obj_id', 'chk_id', 'status_id')][0]
         if _id in ret[which_categorie]:
             ret[which_categorie][_id][categorie_infos][categorie_info_record['key']] = categorie_info_record
     return ret
@@ -200,20 +201,20 @@ def _get_queries_and_result_rows(pg_manager, ctx_list, defaultparams):
     db_mapping['status_id'] = defaultparams['status_id']
     db_mapping['check_status'] = defaultparams['status']
 
-    for key, value in db_mapping.items():
+    for key, value in list(db_mapping.items()):
         if value and value is not True:
             for field in GROUP_FIELDS + CHECK_FIELDS + STATUS_FIELDS:
                 if field.split('.')[1] == key:
                     if hasattr(value, '__iter__'):
-                        ids = dict(zip(range(0, len(value)), value))
+                        ids = dict(list(zip(list(range(0, len(value))), value)))
                         query_item = []
-                        for key, value in ids.iteritems():
+                        for key, value in ids.items():
                             query_item.append('%%(__table_key_%s_%d__)s' % (field, key))
                             defaultparams.update({'__table_key_%s_%d__' % (field, key): value})
                         where += [field + " IN (%s)" % (', '.join(query_item))]
                         break
                     else:
-                        where += [field + "=%(" + [key for key, v in defaultparams.iteritems() if v == value][0] + ")s"]
+                        where += [field + "=%(" + [key for key, v in defaultparams.items() if v == value][0] + ")s"]
                         break
 
     if defaultparams.get('next_check_expired'):
@@ -352,7 +353,7 @@ def get_status(pg_manager, ctx_list, _request, params=None):
 
     rows, query_from, query_where = _get_queries_and_result_rows(pg_manager, ctx_list, defaultparams)
 
-    statuss = reduce(lambda dicts, row: dicts + [dict(zip(STATUS_FIELDS + GROUP_FIELDS + CHECK_FIELDS + OBJECT_FIELDS, row))], rows, [])
+    statuss = reduce(lambda dicts, row: dicts + [dict(list(zip(STATUS_FIELDS + GROUP_FIELDS + CHECK_FIELDS + OBJECT_FIELDS, row)))], rows, [])
     for spvstatus in statuss:
         group  = dict(reduce(lambda pairs, key: pairs + ((key[len('groups.'):],  spvstatus[key]),), GROUP_FIELDS,  ()))
         stat   = dict(reduce(lambda pairs, key: pairs + ((key[len('status.'):],  str(spvstatus[key])),), STATUS_FIELDS, ()))
@@ -387,7 +388,7 @@ def get_status(pg_manager, ctx_list, _request, params=None):
         ret = _get_infos(pg_manager, ctx_list, query, ret, defaultparams, 'checks')
 
     if defaultparams['update_next_check']:
-        for status in ret['status'].values():
+        for status in list(ret['status'].values()):
             pg_manager.execute(ctx_list[0],
                     "UPDATE status SET next_check=now() + CAST ('%(repeat)s seconds' AS INTERVAL) " \
                     "WHERE status_id=%(status_id)s AND seq_id=%(seq_id)s",
@@ -447,7 +448,7 @@ def get_plugin_checks(pg_manager, ctx_list, _request, params=None):
     rows = pg_manager.fetchall(ctx_list[0])
     checks = {}
     for row in rows:
-        checks[row[0]] = dict(zip(("chk_id", "plugin", "plugin_check", "name", "repeat", "repeat_on_error"), row))
+        checks[row[0]] = dict(list(zip(("chk_id", "plugin", "plugin_check", "name", "repeat", "repeat_on_error"), row)))
 
     return checks
 
@@ -702,7 +703,7 @@ def set_checks_status(pg_manager, ctx_list, _request, checks):
         pg_manager.execute(ctx_list[0], query, check)
         if check.get('status_infos'):
             tmp_dict = sjutils.flatten_dict(check['status_infos'], sep = ':')
-            for key, value in tmp_dict.iteritems():
+            for key, value in tmp_dict.items():
                 query = """INSERT INTO status_infos_view (status_id, key, value) VALUES (%(status_id)s, %(key)s, %(value)s)"""
                 pg_manager.execute(ctx_list[0], query, {'status_id': check['status_id'],
                                      'key': str(key),
@@ -758,7 +759,7 @@ def create_objects(pg_manager, ctx_list, _request, objects):
 
             # Insert object_infos
             if 'infos' in obj:
-                for key, value in obj['infos'].iteritems():
+                for key, value in obj['infos'].items():
                     query = """INSERT INTO object_infos (obj_id, key, value) VALUES
                         (%(obj_id)s, %(obj_key)s, %(obj_value)s)"""
                     pg_manager.execute(ctx_list[0], query,
@@ -769,7 +770,7 @@ def create_objects(pg_manager, ctx_list, _request, objects):
                 query = "INSERT INTO objects_group (obj_id, grp_id) VALUES (%(obj_id)s, %(group_id)s)"
                 pg_manager.execute(ctx_list[0], query, {'obj_id': db_obj[0], 'group_id': obj['group_id']})
 
-        except sjutils.PgConnManager.DatabaseError, error:
+        except sjutils.PgConnManager.DatabaseError as error:
             logger.debug('Rollback object creation for address %s.' % obj['address'])
             pg_manager.execute(ctx_list[0], "ROLLBACK TO save%s" % savepoint)
             if db_obj:
@@ -843,7 +844,7 @@ def create_checks(pg_manager, ctx_list, _request, checks):
 
             # Insert check_infos
             if 'infos' in chk:
-                for key, value in chk['infos'].iteritems():
+                for key, value in chk['infos'].items():
                     query = """INSERT INTO check_infos (chk_id, key, value) VALUES
                         (%(chk_id)s, %(chk_key)s, %(chk_value)s)"""
                     pg_manager.execute(ctx_list[0], query,
@@ -854,7 +855,7 @@ def create_checks(pg_manager, ctx_list, _request, checks):
                 query = "INSERT INTO checks_group (chk_id, grp_id) VALUES (%(chk_id)s, %(group_id)s)"
                 pg_manager.execute(ctx_list[0], query, {'chk_id': db_chk[0], 'group_id': chk['group_id']})
 
-        except sjutils.PgConnManager.DatabaseError, error:
+        except sjutils.PgConnManager.DatabaseError as error:
             logger.debug('Rollback check creation for %s.%s.' % (chk['plugin'], chk['plugin_check']))
             pg_manager.execute(ctx_list[0], "ROLLBACK TO save%s" % savepoint)
             if db_chk:
@@ -907,7 +908,7 @@ def create_groups(pg_manager, ctx_list, _request, groups):
             ret[db_grp[0]] = {'grp_id': db_grp[0], 'name': db_grp[1]}
 
             pg_manager.commit(ctx_list[0])
-        except sjutils.PgConnManager.DatabaseError, error:
+        except sjutils.PgConnManager.DatabaseError as error:
             logger.debug('Rollback group creation for %s.' % grp['name'])
             pg_manager.execute(ctx_list[0], "ROLLBACK TO save%s" % savepoint)
             if db_grp:
@@ -978,10 +979,10 @@ def delete_status_infos(pg_manager, ctx_list, _request, sinfo_ids):
 def __delete_item(pg_manager, ctx_list, table, table_key, item_list):
     """ Delete a set of items from @table. """
 
-    ids = dict(zip(range(0, len(item_list)), item_list))
+    ids = dict(list(zip(list(range(0, len(item_list))), item_list)))
     query_item = []
     query_dict = {}
-    for key, value in ids.iteritems():
+    for key, value in ids.items():
         query_item.append('%%(__table_key_%d__)s' % key)
         query_dict.update({'__table_key_%d__' % key: value})
     query_dict.update({'table': table, 'table_key': table_key})
@@ -990,7 +991,7 @@ def __delete_item(pg_manager, ctx_list, table, table_key, item_list):
     try:
         pg_manager.execute(ctx_list[0], query, query_dict)
         pg_manager.commit(ctx_list[0])
-    except sjutils.PgConnManager.DatabaseError, _error:
+    except sjutils.PgConnManager.DatabaseError as _error:
         logger.debug('Rollback delete in table %s' % table)
         raise
 
@@ -1011,13 +1012,13 @@ def __update_infos(pg_manager, ctx_list, table_infos, item_infos):
     """
 
     if 'insert' in item_infos:
-        for key, value in item_infos['insert'].iteritems():
+        for key, value in item_infos['insert'].items():
             query = """INSERT INTO %(table_name)s
                 (%(table_id)s, key, value) VALUES (%(table_id_value)s, %%(key)s, %%(value)s)""" % table_infos
             pg_manager.execute(ctx_list[0], query, {'key': key, 'value': value})
 
     if 'delete' in item_infos:
-        for key, value in item_infos['delete'].iteritems():
+        for key, value in item_infos['delete'].items():
             query = """DELETE FROM %(table_name)s WHERE %(table_id)s=%(table_id_value)s
                 AND (key=%%(key)s OR value=%%(value)s)""" % table_infos
             pg_manager.execute(ctx_list[0], query, {'key': key, 'value': value})
@@ -1046,7 +1047,7 @@ def _group_manage_objects(pg_manager, ctx_list, action, group, objects):
         if not len(grps) > 0:
             infos['errors'].append({'type': 'group', 'name': group, 'message': 'Not found in database'})
             return infos
-        grp_id = grps.keys()[0]
+        grp_id = list(grps.keys())[0]
     else:
         raise TypeError('group expecting to be an integer or a string')
 
@@ -1074,7 +1075,7 @@ def _group_manage_objects(pg_manager, ctx_list, action, group, objects):
             if not len(objs) > 0:
                 infos['errors'].append({'type': 'object', 'address': obj, 'message': 'Not found in database'})
                 continue
-            obj_id = objs.keys()[0]
+            obj_id = list(objs.keys())[0]
         else:
             raise TypeError('Obj expecting to be an integer or a string')
 
@@ -1090,7 +1091,7 @@ def _group_manage_objects(pg_manager, ctx_list, action, group, objects):
 
         try:
             pg_manager.execute(ctx_list[0], query, (grp_id, obj_id))
-        except sjutils.PgConnManager.DatabaseError, error:
+        except sjutils.PgConnManager.DatabaseError as error:
             infos['errors'].append({'type': 'objects_group', 'obj_id': obj_id, 'grp_id': grp_id, 'message': str(error)})
 
     pg_manager.commit(ctx_list[0])
@@ -1195,7 +1196,7 @@ def update(pg_manager, ctx_list, _request, params):
     try:
         # Update objects
         if 'objects' in params:
-            for obj_id, obj_update in params['objects'].iteritems():
+            for obj_id, obj_update in params['objects'].items():
                 query = "UPDATE objects SET address=%(address)s WHERE obj_id=%(obj_id)s"
                 pg_manager.execute(ctx_list[0], query, obj_update)
 
@@ -1206,7 +1207,7 @@ def update(pg_manager, ctx_list, _request, params):
 
         # Update checks
         if 'checks' in params:
-            for chk_id, chk_update in params['checks'].iteritems():
+            for chk_id, chk_update in params['checks'].items():
                 for chk_param in ('name', 'plugin', 'plugin_check', 'repeat', 'repeat_on_error'):
                     query = "UPDATE checks SET " + chk_param + "=%(" + chk_param + ")s WHERE chk_id=%(chk_id)s"
                     pg_manager.execute(ctx_list[0], query, chk_update)
@@ -1218,12 +1219,12 @@ def update(pg_manager, ctx_list, _request, params):
 
         # Update groups
         if 'groups' in params:
-            for _grp_id, grp_update in params['groups'].iteritems():
+            for _grp_id, grp_update in params['groups'].items():
                 query = "UPDATE groups SET name=%(name)s WHERE grp_id=%(grp_id)s"
                 pg_manager.execute(ctx_list[0], query, grp_update)
 
         pg_manager.commit(ctx_list[0])
-    except sjutils.PgConnManager.DatabaseError, _error:
+    except sjutils.PgConnManager.DatabaseError as _error:
         logger.debug('Rollback update')
         raise
 
