@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ([2.67])
-AC_INIT([webengine-spv],[0.14.3])
+AC_INIT([webengine-spv],[0.14.4~dev])
 
 AM_INIT_AUTOMAKE([foreign])
 AM_PATH_PYTHON([2.5])
