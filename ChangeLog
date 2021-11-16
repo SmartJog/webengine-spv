@@ -1,4 +1,4 @@
-Version 0.14.4~dev
+Version 0.15.0 Released on 2021/11/16
 
 	* Make the code compatible with Python3
 	* Format the code with Black
