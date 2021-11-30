@@ -271,7 +271,7 @@ def _get_queries_and_result_rows(pg_manager, ctx_list, defaultparams):
         if value and value is not True:
             for field in GROUP_FIELDS + CHECK_FIELDS + STATUS_FIELDS:
                 if field.split(".")[1] == key:
-                    if hasattr(value, "__iter__"):
+                    if hasattr(value, "__iter__") and not isinstance(value, str):
                         ids = dict(list(zip(list(range(0, len(value))), value)))
                         query_item = []
                         for key, value in ids.items():

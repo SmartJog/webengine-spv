@@ -1,3 +1,9 @@
+webengine-spv (0.15.1-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Nicolas Delvaux <nicolas.delvaux@cji.paris>  Tue, 30 Nov 2021 18:06:55 +0100
+
 webengine-spv (0.15.0-1) unstable; urgency=medium
 
   * New upstream version
