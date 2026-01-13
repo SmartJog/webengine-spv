@@ -180,7 +180,7 @@ def _get_infos(
 
     # Initialize categorie_infos
     for _id, categorie in ret[which_categorie].items():
-        if not categorie_infos in categorie:
+        if categorie_infos not in categorie:
             categorie[categorie_infos] = {}
 
     pg_manager.execute(ctx_list[0], query, defaultparams)
@@ -204,9 +204,9 @@ def _get_infos(
             if k in ("obj_id", "chk_id", "status_id")
         ][0]
         if _id in ret[which_categorie]:
-            ret[which_categorie][_id][categorie_infos][
-                categorie_info_record["key"]
-            ] = categorie_info_record
+            ret[which_categorie][_id][categorie_infos][categorie_info_record["key"]] = (
+                categorie_info_record
+            )
     return ret
 
 
@@ -488,7 +488,7 @@ def get_status(pg_manager, ctx_list, _request, params=None):
         stat["chk_id"] = spvstatus["checks.chk_id"]
 
         if defaultparams.get("get_check_groups"):
-            if not "groups" in ret["checks"][check["chk_id"]]:
+            if "groups" not in ret["checks"][check["chk_id"]]:
                 ret["checks"][check["chk_id"]]["groups"] = {}
             ret["checks"][check["chk_id"]]["groups"][group["grp_id"]] = group
 
@@ -760,9 +760,9 @@ def _get_objects(pg_manager, ctx_list, _request, params=None):
             "creation_date": str(row[2]),
         }
         if defaultparams["get_object_groups"]:
-            if not "groups" in objects[row[0]]:
+            if "groups" not in objects[row[0]]:
                 objects[row[0]]["groups"] = {}
-            if not row[3] is None and not row[4] is None:
+            if row[3] is not None and row[4] is not None:
                 objects[row[0]]["groups"][row[3]] = {"grp_id": row[3], "name": row[4]}
 
     return objects
@@ -853,7 +853,7 @@ def set_checks_status(pg_manager, ctx_list, _request, checks):
     """
 
     for check in checks:
-        if check["status_id"] == None:
+        if check["status_id"] is None:
             logger.error(
                 "set_checks_status: Trying to set check status with invalid input parameter (status_id): %s"
                 % (str(check))
@@ -1265,7 +1265,7 @@ def _group_manage_objects(pg_manager, ctx_list, action, group, objects):
 
     infos = {"errors": []}
 
-    if not action in ("add", "remove"):
+    if action not in ("add", "remove"):
         raise ValueError("Unknown action %s" % action)
 
     grp_id = 0

@@ -2,7 +2,6 @@ from sjconf import *
 
 
 class Plugin(PluginWithTemplate):
-
     VERSION = "@VERSION@"
 
     def template_path(self, file_path, confs_to_test):

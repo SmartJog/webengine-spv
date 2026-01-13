@@ -1,10 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-""" Unit tests for webengine-spv-services. """
+"""Unit tests for webengine-spv-services."""
 
 from importer import Importer
-from pprint import pprint
 import unittest
 
 
@@ -286,7 +285,7 @@ class ServiceTest(unittest.TestCase):
         """['get_checks'] Test get_status with params not specified"""
         self._get_status_tests_create_data()
         ret = self.imp.call("spv.services", "get_checks", None)
-        self.assertTrue(ret != None)
+        self.assertTrue(ret is not None)
 
     #
     # CREATE TEST

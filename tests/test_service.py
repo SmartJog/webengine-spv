@@ -1,10 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-""" Unit tests for webengine-spv-services. """
+"""Unit tests for webengine-spv-services."""
 
 from importer import Importer
-from pprint import pprint
 import unittest
 
 
